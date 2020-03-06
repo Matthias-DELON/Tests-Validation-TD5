@@ -9,8 +9,9 @@ class ValidParentheses {
 
     public static void main(String[] args) {
 
-        System.out.println(ValidParentheses.isValid("(}"));
-        System.out.println(ValidParentheses.isValid(""));
+        System.out.println("(} ? " + ValidParentheses.isValid("(}"));
+        System.out.println("(3+1)*8 ? " + ValidParentheses.isValid("(3+1)*8"));
+        System.out.println("([3]+1)*8 ? " + ValidParentheses.isValid("([3]+1)*8"));
     }
 
     // Hash table that takes care of the mappings.
@@ -45,9 +46,9 @@ class ValidParentheses {
                 if (mappings.containsKey(c)) {
 
                     // Get the top element of the stack. If the stack is empty, set a dummy value of '#'
-                    char topElement = stack.size() == 0 ? '#' : stack.poll();
+                    char topElement = stack.size() == 0 ? '#' : stack.pollLast();
 
-                    assert (stack.isEmpty()) || (topElement!='#'): "Invariant: if the stack is empty we get the symbol #";	// assertion 2
+                    assert (stack.size() == 0) || (topElement!='#'): "Invariant: if the stack is empty we get the symbol #";	// assertion 2
                     // If the mapping for this bracket doesn't match the stack's top element, return false.
                     if (topElement != mappings.get(c)) {
                         return false;
