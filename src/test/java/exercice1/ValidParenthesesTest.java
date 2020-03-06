@@ -15,7 +15,27 @@ public class ValidParenthesesTest {
     }
 
     @Test
-    public void isValid_1() {
+    public void isValid_onlyParentheses_true() {
         assertTrue(ValidParentheses.isValid("(3+4)*8"));
+    }
+
+    @Test
+    public void isValid_onlyCrochets_true() {
+        assertTrue(ValidParentheses.isValid("[3+4]*8"));
+    }
+
+    @Test
+    public void isValid_onlyAccolades_true() {
+        assertTrue(ValidParentheses.isValid("{3+4}*8"));
+    }
+
+    @Test
+    public void isValid_Mix_true() {
+        assertTrue(ValidParentheses.isValid("[(3)+4]*{8+1}"));
+    }
+
+    @Test
+    public void isValid_Mix_false() {
+        assertFalse(ValidParentheses.isValid("[(3){+4]*{8+1}"));
     }
 }
