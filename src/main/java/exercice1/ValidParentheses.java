@@ -1,7 +1,8 @@
 package exercice1;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.HashMap;
-import java.util.Stack;
 
 class ValidParentheses {
 
@@ -16,7 +17,7 @@ class ValidParentheses {
 
     // Initialize hash map with mappings. This simply makes the code easier to read.
     public ValidParentheses() {
-        this.mappings = new HashMap<Character, Character>();
+        this.mappings = new HashMap<>();
         this.mappings.put(')', '(');
         this.mappings.put('}', '{');
         this.mappings.put(']', '[');
@@ -30,7 +31,7 @@ class ValidParentheses {
         boolean result= true;
 
         // Initialize a stack to be used in the algorithm.
-        Stack<Character> stack = new Stack<Character>();
+        Deque<Character> stack = new ArrayDeque<>();
 
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
@@ -42,7 +43,7 @@ class ValidParentheses {
                 if (this.mappings.containsKey(c)) {
 
                     // Get the top element of the stack. If the stack is empty, set a dummy value of '#'
-                    char topElement = stack.empty() ? '#' : stack.pop();
+                    char topElement = stack.size() == 0 ? '#' : stack.poll();
 
                     assert (stack.isEmpty()) || (topElement!='#'): "Invariant: if the stack is empty we get the symbol #";	// assertion 2
                     // If the mapping for this bracket doesn't match the stack's top element, return false.
@@ -51,12 +52,12 @@ class ValidParentheses {
                     }
                 } else {
                     // If it was an opening bracket, push to the stack.
-                    stack.push(c);
+                    stack.offer(c);
                 }
             }
         }
 
-        assert (!s.isEmpty()) || (result == true) : "post-condition: when s is empty we return true";	//assertion 3
+        assert (stack.size() != 0) || (result == true) : "post-condition: when s is empty we return true";	//assertion 3
         // If the stack still contains elements, then it is an invalid expression.
         return stack.isEmpty();
     }
