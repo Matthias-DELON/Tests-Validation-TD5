@@ -2,7 +2,7 @@ package exercice3;
 class SortedSquares {
 
 
-    public int[] sortedSquares(int[] A) {
+    public static int[] sortedSquares(int[] A) {
 
         assert isSorted(A): "pre-condition: array A must be a sorted one!";  //assertion 1
 
@@ -42,7 +42,7 @@ class SortedSquares {
     }
 
 
-    private boolean isElement(int[] a, int[] ans) {
+    private static boolean isElement(int[] a, int[] ans) {
 
         for(int i=0; i< a.length; i++)
             if(!elementOf(a[i]*a[i], ans))
@@ -52,7 +52,7 @@ class SortedSquares {
     }
 
 
-    private boolean elementOf(int i, int[] ans) {
+    private static boolean elementOf(int i, int[] ans) {
         for(int j=0; j<ans.length; j++)
             if(ans[j]==i)
                 return true;
@@ -60,7 +60,7 @@ class SortedSquares {
     }
 
 
-    private boolean isSorted(int[] a) {
+    private static boolean isSorted(int[] a) {
         for(int i=0; i<a.length-1; i++)
             if(a[i]>a[i+1])
                 return false;
@@ -71,7 +71,7 @@ class SortedSquares {
     public static void main(String[] args) {
 
 
-        int[] tab=new SortedSquares().sortedSquares(new int[] {-4,-1,0,3,10});
+        int[] tab=SortedSquares.sortedSquares(new int[] {-4,-1,0,3,10});
         for(int i: tab)
             System.out.println(i);
     }
