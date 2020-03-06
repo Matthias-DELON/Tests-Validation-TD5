@@ -9,22 +9,24 @@ class ValidParentheses {
 
     public static void main(String[] args) {
 
-        System.out.println(new ValidParentheses().isValid("(}"));
+        System.out.println(ValidParentheses.isValid("(}"));
+        System.out.println(ValidParentheses.isValid(""));
     }
 
     // Hash table that takes care of the mappings.
-    private HashMap<Character, Character> mappings;
+    private static final HashMap<Character, Character> mappings;
 
     // Initialize hash map with mappings. This simply makes the code easier to read.
-    public ValidParentheses() {
-        this.mappings = new HashMap<>();
-        this.mappings.put(')', '(');
-        this.mappings.put('}', '{');
-        this.mappings.put(']', '[');
+    static {
+        HashMap<Character, Character> aMap = new HashMap<>();
+        aMap.put(')', '(');
+        aMap.put('}', '{');
+        aMap.put(']', '[');
+        mappings = aMap;
     }
 
 
-    public boolean isValid(String s) {
+    public static boolean isValid(String s) {
 
         assert true: "no pre-condition!"; 		// assertion 1
 
@@ -40,14 +42,14 @@ class ValidParentheses {
 
 
                 // If the current character is a closing bracket.
-                if (this.mappings.containsKey(c)) {
+                if (mappings.containsKey(c)) {
 
                     // Get the top element of the stack. If the stack is empty, set a dummy value of '#'
                     char topElement = stack.size() == 0 ? '#' : stack.poll();
 
                     assert (stack.isEmpty()) || (topElement!='#'): "Invariant: if the stack is empty we get the symbol #";	// assertion 2
                     // If the mapping for this bracket doesn't match the stack's top element, return false.
-                    if (topElement != this.mappings.get(c)) {
+                    if (topElement != mappings.get(c)) {
                         return false;
                     }
                 } else {
